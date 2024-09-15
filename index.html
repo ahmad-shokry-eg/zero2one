@@ -1,67 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>0to.one - Coming Soon</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0to.one - حوّل فكرتك إلى عمل ناجح</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
-        /* CSS Styles */
+        :root {
+            --electric-blue: #007BFF;
+            --vibrant-purple: #6F00FF;
+            --dark-gray: #1C1C1E;
+            --white: #FFFFFF;
+            --neon-green: #39FF14;
+        }
+        
         body {
+            font-family: 'Cairo', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
+            background-color: var(--dark-gray);
+            color: var(--white);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--electric-blue), var(--vibrant-purple));
+            padding: 80px 0;
             text-align: center;
+            position: relative;
             overflow: hidden;
         }
-        .container {
-            position: relative;
-            height: 100vh;
-            width: 100%;
-        }
-        .content {
+        
+        .particles {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
+        
         h1 {
-            font-size: 3em;
-            margin: 0;
+            font-size: 48px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
-        p {
-            font-size: 1.2em;
+        
+        h2 {
+            font-size: 24px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
         }
-        /* Add any additional styles here */
+        
+        .cta-button {
+            background-color: var(--neon-green);
+            color: var(--dark-gray);
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            z-index: 1;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.5s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .services {
+            padding: 60px 0;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-item i {
+            font-size: 48px;
+            color: var(--electric-blue);
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            background-color: rgba(28, 28, 30, 0.8);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--neon-green);
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+            
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .light-mode {
+            background-color: var(--white);
+            color: var(--dark-gray);
+        }
+        
+        .light-mode .service-item {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .light-mode footer {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: var(--dark-gray);
+        }
+        
+        .light-mode .footer-links a {
+            color: var(--dark-gray);
+        }
+        
+        .light-mode .theme-toggle {
+            color: var(--dark-gray);
+        }
     </style>
 </head>
 <body>
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-adjust"></i>
+    </button>
 
-    <div class="container">
-        <div class="content">
-            <h1>0to.one</h1>
-            <p>Coming Soon</p>
+    <header>
+        <div class="particles" id="particles-js"></div>
+        <div class="container">
+            <h1>حوّل فكرتك إلى عمل ناجح</h1>
+            <h2>حلول مبتكرة وشاملة لتحويل أفكارك إلى واقع باستخدام أحدث تقنيات الـ No-Code/Low-Code.</h2>
+            <a href="https://wa.me/201552349490" class="cta-button"><i class="fab fa-whatsapp"></i> تواصل معنا عبر الواتساب</a>
         </div>
-    </div>
+    </header>
 
+    <section class="services">
+        <div class="container">
+            <div class="service-grid">
+                <div class="service-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>دراسات الجدوى</h3>
+                    <p>تحليل دقيق لنجاح مشروعك</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-tasks"></i>
+                    <h3>تخطيط الأعمال</h3>
+                    <p>استراتيجيات مدروسة لنمو مستدام</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-code"></i>
+                    <h3>التطوير التقني</h3>
+                    <p>حلول No-Code/Low-Code متطورة</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-flask"></i>
+                    <h3>اختبار السوق</h3>
+                    <p>تقييم فعال لاستجابة السوق</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>تكامل التحليلات</h3>
+                    <p>رؤى ذكية لاتخاذ القرارات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2>هل أنت مستعد لبدء رحلتك الريادية؟ لنبدأ الآن!</h2>
+            <a href="https://wa.me/201552349490" class="cta-button"><i class="fab fa-whatsapp"></i> تواصل معنا عبر الواتساب</a>
+            <div class="footer-links">
+                <a href="#privacy">سياسة الخصوصية</a>
+                <a href="#terms">شروط الخدمة</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // JavaScript Code
-        // Example: Simple fade-in animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const content = document.querySelector('.content');
-            content.style.opacity = 0;
-            let opacity = 0;
-
-            const fadeIn = setInterval(function() {
-                if (opacity >= 1) {
-                    clearInterval(fadeIn);
-                }
-                opacity += 0.02;
-                content.style.opacity = opacity;
-            }, 30);
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 6, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
+                modes: { grab: { distance: 400, line_linked: { opacity: 1 } }, bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 }, repulse: { distance: 200, duration: 0.4 }, push: { particles_nb: 4 }, remove: { particles_nb: 2 } }
+            },
+            retina_detect: true
         });
-    </script>
 
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+        }
+    </script>
 </body>
 </html>
